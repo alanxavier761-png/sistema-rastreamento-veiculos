@@ -84,11 +84,31 @@ curl -s 'http://localhost:3003/api/trpc/employees.list' \
 
 ---
 
+## Correções Aplicadas (25/01/2026 - Atualização)
+
+### Problema: Dados sumiam após cadastro
+**Causa:** Páginas Employees e Managers usavam dados mockados (useState local)
+**Solução:** Reescritas para usar tRPC com queries e mutations reais
+
+### Arquivos corrigidos no VPS:
+- `/var/www/timealert/client/src/pages/Employees.tsx` - Usa tRPC
+- `/var/www/timealert/client/src/pages/Managers.tsx` - Usa tRPC
+
+### Integração WhatsApp atualizada:
+- **API anterior:** wa.me (estava com timeout)
+- **API atual:** W-API (funcionando)
+- **Instance ID:** B31OFQ-1C9A0S-CX5UPN
+- **Token:** AIHNSsX3k9RAtcx9wuIcr1XhF4asxArhE
+
+### Webhooks W-API:
+- **Ao receber mensagem:** `http://72.62.111.179:3003/api/webhooks/wapi/incoming`
+- **Status da mensagem:** `http://72.62.111.179:3003/api/webhooks/wapi/status`
+
+---
+
 ## Problemas Conhecidos
 
-1. **wa.me API Timeout (504):** O envio de mensagens está dando timeout. Verificar conexão WebSocket no painel portal.api-wa.me.
-
-2. **OAuth não configurado:** A autenticação OAuth original não está funcionando (OAUTH_SERVER_URL não configurado). Usando autenticação local.
+1. **OAuth não configurado:** Usando autenticação local (localStorage + headers).
 
 ---
 
